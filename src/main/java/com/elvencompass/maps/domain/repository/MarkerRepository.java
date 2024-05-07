@@ -10,5 +10,5 @@ import com.elvencompass.maps.domain.entity.Marker;
 public interface MarkerRepository {
      public Optional<Marker> findById(int id);
     public Marker save(Marker marker);
-    public void delete(Marker marker);
+    public Marker delete(Marker marker);
 }

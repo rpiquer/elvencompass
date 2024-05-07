@@ -34,23 +34,24 @@ public interface MarkerMapper {
 
     List<Marker> toMarkerList(List<MarkerDTO> markerDTOList);
 
-    @Mapping(target = "referencedLocation", ignore = true)
+    @Mapping(target = "referencedLocation", expression = "java(LocationMapper.mapper.toLocation(subMarkerEntity.getReferencedSubLocationEntity()))")
     @Mapping(target = "containerLocation", expression = "java(LocationMapper.mapper.toLocation(subMarkerEntity.getContainerSubLocationEntity()))")
     Marker subMarkerEntityToMarker(SubMarkerEntity subMarkerEntity);
     @Mapping(target = "referencedLocation", expression = "java(LocationMapper.mapper.toLocation(markerDTO.getReferencedLocationDTO()))")
     @Mapping(target = "containerLocation", expression = "java(LocationMapper.mapper.toLocation(markerDTO.getContainerLocationDTO()))")
     Marker toMarker(MarkerDTO markerDTO);
-    @Mapping(target = "referencedLocation", expression = "java(LocationMapper.mapper.toLocation(markerEntity.getReferencedSubLocationEntity()))")
-    @Mapping(target = "containerLocation", expression = "java(LocationMapper.mapper.toLocation(markerEntity.getContainerSubLocationEntity()))")
+    @Mapping(target = "referencedLocation", ignore = true)
+    @Mapping(target = "containerLocation", ignore = true)
     Marker toMarker(MarkerEntity markerEntity);
 
     List<MarkerEntity> toMarkerEntityList(List<Marker> markerList);
-    @Mapping(target = "referencedSubLocationEntity", expression = "java(LocationMapper.mapper.toSubLocationEntity(marker.getReferencedLocation()))")
-    @Mapping(target = "containerSubLocationEntity", expression = "java(LocationMapper.mapper.toSubLocationEntity(marker.getContainerLocation()))")
+    @Mapping(target = "referencedLocationId", ignore = true)
+    @Mapping(target = "containerLocationId", ignore = true)
     MarkerEntity toMarkerEntity(Marker marker);
 
     List<SubMarkerEntity> toSubMarkerEntityList(List<Marker> markerList);
     @Mapping(target = "containerSubLocationEntity", expression = "java(LocationMapper.mapper.toSubLocationEntity(marker.getContainerLocation()))")
+    @Mapping(target = "referencedSubLocationEntity", expression = "java(LocationMapper.mapper.toSubLocationEntity(marker.getReferencedLocation()))")
     SubMarkerEntity toSubMarkerEntity(Marker marker);
     
 }

@@ -14,12 +14,10 @@ public class MarkerEntity {
     private float latitude;
     private float longitude;
 
-    @OneToOne
-    @JoinColumn(name="referenced_location")
-    private SubLocationEntity referencedSubLocationEntity;
+    @Column(name="referenced_location")
+    private int referencedLocationId;
 
-    @ManyToOne
-    @JoinColumn(name="container_location")
-    private SubLocationEntity ContainerSubLocationEntity;
+    @Column(name="container_location")
+    private int containerLocationId;
     private int userId;
 }

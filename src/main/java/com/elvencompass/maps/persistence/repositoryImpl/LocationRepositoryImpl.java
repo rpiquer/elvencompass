@@ -1,5 +1,6 @@
 package com.elvencompass.maps.persistence.repositoryImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.elvencompass.maps.domain.entity.Location;
+import com.elvencompass.maps.domain.entity.Marker;
 import com.elvencompass.maps.domain.repository.LocationRepository;
 import com.elvencompass.maps.mapper.LocationMapper;
 import com.elvencompass.maps.persistence.dao.LocationDAO;
@@ -44,6 +46,11 @@ public class LocationRepositoryImpl implements LocationRepository{
     @Override
     public Location save(Location location) {
         System.out.println(location);
+        if (location.getMarkerList()==null) {
+            List<Marker> markerList = new ArrayList<>();
+            location.setMarkerList(markerList);
+            
+        }
         return LocationMapper.mapper.toLocation(locationDAO.save(LocationMapper.mapper.toLocationEntity(location)));
     }
 

@@ -17,5 +17,9 @@ public class SubMarkerEntity {
     @ManyToOne
     @JoinColumn(name="container_location")
     private SubLocationEntity containerSubLocationEntity;
+
+    @OneToOne
+    @JoinColumn(name="referenced_location")
+    private SubLocationEntity referencedSubLocationEntity;
     private int userId;
 }
